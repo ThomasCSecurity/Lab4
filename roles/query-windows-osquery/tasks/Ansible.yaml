@@ -14,3 +14,4 @@
     - win_command: osqueryi "SELECT * FROM logon_sessions;"
     - win_command: osqueryi 'SELECT pid,name,path,cmdline FROM processes WHERE state="STILL_ACTIVE";'
     - win_command: osqueryi 'SELECT s.pid,p.name,remote_address,family,protocol,remote_port FROM process_open_sockets s JOIN processes p on s.pid = p.pid WHERE remote_port NOT IN (80, 443) AND family = 2;'
+    
