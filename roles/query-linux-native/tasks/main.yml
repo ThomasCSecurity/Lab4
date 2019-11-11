@@ -1,0 +1,64 @@
+---
+- name: Print the hostname
+  debug:
+    var: ansible_facts.ansible_fqdn
+
+- name: Print the OS
+  debug:
+    var: ansible_facts.ansible_distribution
+
+- name: Print the OS version
+  debug:
+    var: ansible_facts.ansible_distribution_version
+
+- name: Print the IPv4 address
+  debug:
+    var: ansible_facts.ansible_default_ipv4.address
+
+- name: Get the local users in /etc/passwd
+  command: cat /etc/passwd
+  register: passwd
+
+- name: Print the contents of /etc/passwd
+  debug:
+    var: passwd
+
+- name: Gather the apt package facts
+  package_facts:
+    manager: apt
+
+- name: Print the apt package facts
+  debug:
+    var: ansible_facts.packages
+
+- name: Get the software that is run at startup
+  command: ls /etc/init.d
+  register: initd_contents
+
+- name: Print the startup software
+  debug:
+    var: initd_contents
+
+- name: Get all systemd services
+  command: ls -l /lib/systemd/system/*.service /etc/systemd/system/*.service
+  register: systemd_services
+
+- name: Print the systemd services
+  debug:
+    var: systemd_services
+
+- name: Get user login history
+  command: last
+  register: login_history
+
+- name: Print the login history
+  debug:
+    var: login_history
+
+- name: Get running processes
+  command: ps aux
+  register: running_processes
+
+- name: Print running processes
+  debug:
+    var: running_processes
