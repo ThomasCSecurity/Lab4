@@ -1,0 +1,24 @@
+---
+- name: Install osquery
+  hosts: linux
+  remote_user: student
+  become: yes
+  tasks:
+        - name: Add repository key
+          apt_key:
+                  keyserver: keyserver.ubuntu.com
+                  id: "1484120AC4E9F8A1A577AEEE97A80C63C9D8B80B"
+                  state: present
+
+        - name: server repo
+          apt_repository:
+                  repo: 'deb [arch=amd64] https://pkg.osquery.io/deb deb main'
+                  state: present
+
+        - name: update
+          apt: update_cache=yes
+
+        - name: install osquery task
+          apt:
+                  name: "osquery"
+                  state: present
